@@ -29,3 +29,10 @@ Route::controller(ClientAuthController::class)->group(function () {
         Route::post('logout', 'logout');
     });
 });
+
+
+
+Route::controller(PasswordController::class)->group(function () {
+    Route::post('forgot',  'forgot');
+  
+});
