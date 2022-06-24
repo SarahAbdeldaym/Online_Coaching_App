@@ -23,5 +23,8 @@ use App\Http\Controllers\API\PasswordController;
 Route::controller(ClientAuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('login', 'login')->name('login');
-
+    Route::get('getLogin', 'getLogin')->name('getLogin');
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('clientUser', 'clientUser');
+    });
 });

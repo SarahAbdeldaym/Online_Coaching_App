@@ -63,4 +63,24 @@ class ClientAuthController extends Controller {
         ])->withCookie($cookie);
     }
 
+
+
+    public function getLogin(Request $request) {
+        dd($request);
+        return $request->user();
+    }
+
+    public function clientUser(Request $request) {
+        if (Auth::check()) {
+            $client = Client::with(['books', 'books.coach'])
+                ->where('id', $request->user()->id)->first();
+            return $client;
+        } else {
+            return response()->json([
+                "error" => "Not authenticated",
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
+
 }
