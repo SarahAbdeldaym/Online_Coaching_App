@@ -26,5 +26,6 @@ Route::controller(ClientAuthController::class)->group(function () {
     Route::get('getLogin', 'getLogin')->name('getLogin');
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('clientUser', 'clientUser');
+        Route::post('logout', 'logout');
     });
 });
