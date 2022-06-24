@@ -20,10 +20,8 @@ use App\Http\Controllers\API\PasswordController;
 //     return $request->user();
 // });
 
-
 Route::controller(ClientAuthController::class)->group(function () {
     Route::post('register', 'register');
+    Route::post('login', 'login')->name('login');
 
 });
-
-

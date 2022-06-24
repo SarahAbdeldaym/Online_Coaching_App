@@ -44,5 +44,23 @@ class ClientAuthController extends Controller {
         }
     }
 
-    
+    public function login(LoginRequest $request) {
+        $client = Client::where('email', $request->email)->first();
+        if (!$client || !Hash::check($request->password, $client->password)) {
+            return response()->json([
+                "message"  => "Invalid credentials",
+                "status"   => 401,
+            ], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $token = $client->createToken('token')->plainTextToken;
+
+        $cookie = cookie('jwt', $token, 60 * 24, null, null, false, false);
+
+        return response()->json([
+            "jwt"    => $token,
+            "status" => 200,
+        ])->withCookie($cookie);
+    }
+
 }
