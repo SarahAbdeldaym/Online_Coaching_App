@@ -34,5 +34,5 @@ Route::controller(ClientAuthController::class)->group(function () {
 
 Route::controller(PasswordController::class)->group(function () {
     Route::post('forgot',  'forgot');
-  
+    Route::post('reset',  'reset');
 });

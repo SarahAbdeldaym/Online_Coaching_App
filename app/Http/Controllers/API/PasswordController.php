@@ -26,7 +26,7 @@ class PasswordController extends Controller
             'token' => $token,
         ]);
 
-        Mail::send('auth.reset',['token' => $token], function(Message $message) use ($email) {
+        Mail::send('auth.reset', ['token' => $token], function (Message $message) use ($email) {
             $message->subject('Reset your password!');
             $message->to($email);
         });
@@ -35,7 +35,24 @@ class PasswordController extends Controller
         return response([
             'message' => 'Check your email'
         ]);
-
     }
 
+
+
+    public function reset(ResetRequest $request)
+    {
+        $passwordReset = DB::table('password_resets')
+            ->where('token', $request->input('token'))->first();
+
+        if (!$client = Client::where('email', $passwordReset->email)->first()) {
+            throw new NotFoundHttpException('User not found');
+        }
+
+        $client->password = Hash::make($request->input('password'));
+        $client->save();
+
+        return response([
+            'message' => 'Reset password successfully'
+        ]);
+    }
 }
