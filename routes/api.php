@@ -30,9 +30,11 @@ Route::controller(ClientAuthController::class)->group(function () {
     });
 });
 
-
-
 Route::controller(PasswordController::class)->group(function () {
     Route::post('forgot',  'forgot');
     Route::post('reset',  'reset');
+});
+
+Route::controller(CoachController::class)->group(function () {
+    Route::get('coaches', 'index');
 });
