@@ -29,5 +29,11 @@ class Client extends Model
         'remember_token',
     ];
 
+    public function feedbacks() {
+        return $this->hasMany(Feedback::class);
+    }
 
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }
