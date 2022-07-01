@@ -11,5 +11,8 @@ class CoachController extends Controller {
     public function index() {
         return Coach::with(['specialist', 'country'])->paginate(5);
     }
-
+    
+    public function show($id) {
+        return Coach::where('id', $id)->with(['specialist', 'country', 'city', 'district'])->get();
+    }
 }

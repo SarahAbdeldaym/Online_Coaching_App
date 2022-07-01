@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
+use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\PasswordController;
 
 /*
@@ -37,4 +38,6 @@ Route::controller(PasswordController::class)->group(function () {
 
 Route::controller(CoachController::class)->group(function () {
     Route::get('coaches', 'index');
+    Route::get('coaches/{id}', 'show');
+
 });
