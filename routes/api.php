@@ -39,5 +39,5 @@ Route::controller(PasswordController::class)->group(function () {
 Route::controller(CoachController::class)->group(function () {
     Route::get('coaches', 'index');
     Route::get('coaches/{id}', 'show');
-
+    Route::get('search', 'search');
 });
