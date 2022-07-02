@@ -40,4 +40,5 @@ Route::controller(CoachController::class)->group(function () {
     Route::get('coaches', 'index');
     Route::get('coaches/{id}', 'show');
     Route::get('search', 'search');
+    Route::get('filter', 'filter');
 });

@@ -25,6 +25,11 @@ class CoachController extends Controller
         return $this->handleSearch($request)->get();
     }
 
+    public function filter(Request $request) {
+        $result = $this->handleSearch($request);
+        return $result->paginate(5);
+    }
+
     private function handleSearch(Request $request)
     {
         $filteredCoaches = Coach::with(['specialist', 'country', 'city', 'district']);
