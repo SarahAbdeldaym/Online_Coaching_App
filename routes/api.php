@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
 use App\Http\Controllers\API\CoachController;
+use App\Http\Controllers\API\FeedbackController;
 use App\Http\Controllers\API\PasswordController;
 
 /*
