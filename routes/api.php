@@ -42,3 +42,8 @@ Route::controller(CoachController::class)->group(function () {
     Route::get('search', 'search');
     Route::get('filter', 'filter');
 });
+
+
+Route::controller(FeedbackController::class)->group(function () {
+    Route::post('feedbacks', 'store');
+});
