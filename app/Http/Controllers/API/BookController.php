@@ -14,4 +14,15 @@ class BookController extends Controller {
         return $books;
     }
 
+    public function store(Request $request) {
+        $data = $request->all();
+        $data['fees'] = Coach::find($request->coach_id)->fees;
+        $data['date'] = now();
+        Book::create($data);
+        return response()->json([
+            "message" => "Reservation Successfully",
+            "status"  => 200,
+        ], Response::HTTP_CREATED);
+    }
+
 }

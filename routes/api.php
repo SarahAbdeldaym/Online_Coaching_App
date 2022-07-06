@@ -55,4 +55,6 @@ Route::controller(FeedbackController::class)->group(function () {
 
 Route::controller(BookController::class)->group(function () {
     Route::get('/books',  'index');
+    Route::post('book/store', 'store');
+    Route::post('/books/test',  'store');
 });
