@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BookController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
@@ -47,4 +48,11 @@ Route::controller(CoachController::class)->group(function () {
 
 Route::controller(FeedbackController::class)->group(function () {
     Route::post('feedbacks', 'store');
+    Route::put('feedbacks', 'update');
+    Route::get('feedbacks/{id}',  'index');
+});
+
+
+Route::controller(BookController::class)->group(function () {
+    Route::get('/books',  'index');
 });
