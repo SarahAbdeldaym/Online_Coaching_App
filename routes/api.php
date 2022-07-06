@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
 use App\Http\Controllers\API\CoachController;
+use App\Http\Controllers\API\CoachScheduleController;
 use App\Http\Controllers\API\FeedbackController;
 use App\Http\Controllers\API\PasswordController;
 
@@ -58,3 +59,6 @@ Route::controller(BookController::class)->group(function () {
     Route::post('book/store', 'store');
     Route::post('/books/test',  'store');
 });
+
+
+Route::get('available-time/{coach_id}', [CoachScheduleController::class, 'index']);
