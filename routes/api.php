@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\CityController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
@@ -63,6 +64,7 @@ Route::controller(BookController::class)->group(function () {
 });
 
 
-Route::get('available-time/{coach_id}', [CoachScheduleControllerr::class, 'index']);
+Route::get('available-time/{coach_id}', [CoachScheduleController::class, 'index']);
 Route::put('update/{client}', [ClientProfileController::class, 'update']);
 Route::get('/specialists', [SpecialistController::class, 'index']);
+Route::get('/cities/{countryCode}', [CityController::class, 'index']);
