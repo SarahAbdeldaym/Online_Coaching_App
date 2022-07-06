@@ -62,3 +62,4 @@ Route::controller(BookController::class)->group(function () {
 
 
 Route::get('available-time/{coach_id}', [CoachScheduleController::class, 'index']);
+Route::put('update/{client}', [ClientProfileController::class, 'update']);
