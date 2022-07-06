@@ -4,10 +4,12 @@ use App\Http\Controllers\API\BookController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\ClientAuthController;
+use App\Http\Controllers\API\ClientProfileController;
 use App\Http\Controllers\API\CoachController;
 use App\Http\Controllers\API\CoachScheduleController;
 use App\Http\Controllers\API\FeedbackController;
 use App\Http\Controllers\API\PasswordController;
+use App\Http\Controllers\API\SpecialistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +63,6 @@ Route::controller(BookController::class)->group(function () {
 });
 
 
-Route::get('available-time/{coach_id}', [CoachScheduleController::class, 'index']);
+Route::get('available-time/{coach_id}', [CoachScheduleControllerr::class, 'index']);
 Route::put('update/{client}', [ClientProfileController::class, 'update']);
+Route::get('/specialists', [SpecialistController::class, 'index']);
