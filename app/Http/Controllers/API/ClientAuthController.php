@@ -95,4 +95,12 @@ class ClientAuthController extends Controller
             "message" => 'Logout successfully',
         ])->withCookie($cookie);
     }
+
+    public function cancelAppointment($id) {
+        Book::find($id)->delete();
+        return response()->json([
+            "message" => "Appointment canceled successfully",
+            "status"  => 203,
+        ], Response::HTTP_OK);
+    }
 }

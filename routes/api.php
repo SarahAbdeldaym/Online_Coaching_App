@@ -32,6 +32,8 @@ Route::controller(ClientAuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('login', 'login')->name('login');
     Route::get('getLogin', 'getLogin')->name('getLogin');
+    Route::get('cancelAppointment/{id}', 'cancelAppointment');
+    
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('clientUser', 'clientUser');
         Route::post('logout', 'logout');
