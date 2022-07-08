@@ -11,5 +11,7 @@ Route::prefix('coach')->group(function () {
 
     Route::get('register', [CoachAuth::class, 'register'])->name('coach.register');
     Route::post('register', [CoachAuth::class, 'registerCheck'])->name('coach.registerCheck');
+    Route::get('login', [CoachAuth::class, 'login'])->name('coach.login');
+    Route::post('login', [CoachAuth::class, 'loginCheck'])->name('coach.loginCheck');
 
 });

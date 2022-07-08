@@ -36,4 +36,21 @@ class CoachAuth extends Controller {
         return redirect(coachUrl('login'));
     }
 
+
+     //Login Coach page function
+     public function login() {
+        return view('coach.auth.login');
+    }
+
+    //Check Coach Login function
+    public function loginCheck() {
+        $rememberme = request('rememberme') == 1 ? true : false;
+        if (coach()->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
+            return redirect(coachUrl('dashboard'));
+        } else {
+            session()->flash('error', trans('admin.incorrect_information_login'));
+            return redirect(coachUrl('login'));
+        }
+    }
+
 }
