@@ -1,5 +1,16 @@
 <?php
 
+if (!function_exists('coachUrl')) {
+    function coachUrl($url = null) {
+        return url('coach/' . $url);
+    }
+}
+
+if (!function_exists('coach')) {
+    function coach() {
+        return auth()->guard('coach');
+    }
+}
 
 if (!function_exists('savePhoto')) {
 

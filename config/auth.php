@@ -41,7 +41,15 @@ return [
             'provider' => 'users',
         ],
 
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
 
+        'coach' => [
+            'driver' => 'session',
+            'provider' => 'coaches',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -73,6 +81,15 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'coaches' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Coach::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
