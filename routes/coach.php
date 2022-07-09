@@ -13,5 +13,6 @@ Route::prefix('coach')->group(function () {
     Route::post('register', [CoachAuth::class, 'registerCheck'])->name('coach.registerCheck');
     Route::get('login', [CoachAuth::class, 'login'])->name('coach.login');
     Route::post('login', [CoachAuth::class, 'loginCheck'])->name('coach.loginCheck');
-
+    Route::get('forgot/password', [CoachAuth::class, 'forgotPassword']);
+    Route::post('forgot/password', [CoachAuth::class, 'forgotPasswordMessage']);
 });

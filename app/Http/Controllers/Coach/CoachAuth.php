@@ -1,11 +1,16 @@
 <?php
 
+
 namespace App\Http\Controllers\Coach;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\CoachResetPassword;
 use App\Models\Coach;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class CoachAuth extends Controller {
     //Register Coach Page Function
@@ -52,5 +57,32 @@ class CoachAuth extends Controller {
             return redirect(coachUrl('login'));
         }
     }
+
+
+    //Forget Password Page
+    public function forgotPassword() {
+        return view('coach.auth.forgot_password');
+    }
+
+
+    //forget password message send
+    public function forgotPasswordMessage() {
+        $coach = Coach::where('email', request('email'))->first();
+        if (!empty($coach)) {
+            $token = app('auth.password.broker')->createToken($coach);
+            DB::table('password_resets')->insert([
+                'email'      => $coach->email,
+                'token'      => $token,
+                'created_at' => Carbon::now(),
+            ]);
+            Mail::to($coach->email, $coach->name_en)
+                ->send(new CoachResetPassword(['data' => $coach, 'token' => $token]));
+
+            session()->flash('success', 'An Email with reset password link has been sent to your email');
+            return redirect(coachUrl('login'));
+        }
+        return back();
+    }
+
 
 }
