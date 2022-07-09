@@ -85,4 +85,38 @@ class CoachAuth extends Controller {
     }
 
 
+    //Reset Password Page
+    public function resetPassword($token) {
+        $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
+        if (!empty($check_token)) {
+            return view('admin.auth.reset_password', ['data' => $check_token]);
+        } else {
+            return redirect(adminUrl('forgot/password'));
+        }
+    }
+
+
+    //Reset Password Operation and Update Data
+    public function resetPasswordUpdateData($token) {
+        request()->validate([
+            'password'              => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ], [], [
+            'password'              => 'Password',
+            'password_confirmation' => 'Confirmation Password',
+        ]);
+
+        $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
+        if (!empty($check_token)) {
+            $coach = Coach::where('email', $check_token->email)->update([
+                'email'    => $check_token->email,
+                'password' => bcrypt(request('password'))
+            ]);
+            DB::table('password_resets')->where('email', $check_token->email)->delete();
+            session()->flash('success', 'password is reset you can login now');
+            return redirect(coachUrl('login'));
+        } else {
+            return redirect(coachUrl('forgot/password'));
+        }
+    }
 }

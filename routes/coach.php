@@ -15,4 +15,6 @@ Route::prefix('coach')->group(function () {
     Route::post('login', [CoachAuth::class, 'loginCheck'])->name('coach.loginCheck');
     Route::get('forgot/password', [CoachAuth::class, 'forgotPassword']);
     Route::post('forgot/password', [CoachAuth::class, 'forgotPasswordMessage']);
+    Route::get('reset/password/{token}', [CoachAuth::class, 'resetPassword']);
+    Route::post('reset/password/{token}', [CoachAuth::class, 'resetPasswordUpdateData']);
 });
