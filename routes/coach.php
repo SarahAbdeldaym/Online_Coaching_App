@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\Coach\CoachAuth;
+use App\Http\Controllers\Coach\CoachController;
 
 
 Route::prefix('coach')->group(function () {
@@ -17,4 +18,9 @@ Route::prefix('coach')->group(function () {
     Route::post('forgot/password', [CoachAuth::class, 'forgotPasswordMessage']);
     Route::get('reset/password/{token}', [CoachAuth::class, 'resetPassword']);
     Route::post('reset/password/{token}', [CoachAuth::class, 'resetPasswordUpdateData']);
+
+    Route::middleware(['coach:coach'])->group(function () {
+        Route::get('profile', [CoachController::class, 'show'])->name('coach.profile');
+
+    });
 });
