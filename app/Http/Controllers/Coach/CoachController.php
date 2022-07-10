@@ -7,11 +7,18 @@ use App\Models\Coach;
 
 
 
-class CoachController extends Controller {
-    public function show() {
+class CoachController extends Controller
+{
+    public function show()
+    {
         $coach = Coach::findOrFail(coach()->id());
         return view('coach.coach.show', compact('coach'));
     }
 
 
+    public function edit()
+    {
+        $coach = Coach::findOrFail(coach()->id());
+        return view('coach.coach.edit', compact('coach'));
+    }
 }
