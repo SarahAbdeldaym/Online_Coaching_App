@@ -22,6 +22,7 @@ Route::prefix('coach')->group(function () {
     Route::middleware(['coach:coach'])->group(function () {
         Route::get('profile', [CoachController::class, 'show'])->name('coach.profile');
         Route::get('profile/edit', [CoachController::class, 'edit'])->name('coach.editInfo');
+        Route::put('profile/update/{coach}', [CoachController::class, 'update'])->name('coach.updateInfo');
 
     });
 });
