@@ -30,6 +30,7 @@ Route::prefix('coach')->group(function () {
         Route::resource('/schedule', CoachScheduleController::class)->except(['create', 'update', 'show', 'edit', 'destroy']);
         Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');
         Route::get('/schedule/{id}/edit', [CoachScheduleController::class, 'edit'])->name('schedule.edit');
+        Route::delete('/schedule/delete/{id}', [CoachScheduleController::class, 'destroy'])->name('schedule.destroy');
 
     });
 });

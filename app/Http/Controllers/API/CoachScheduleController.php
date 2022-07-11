@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Models\CoachSchedule;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateCoachScheduleRequest;
+use App\Models\Book;
 
 class CoachScheduleController extends Controller {
     public function index($coach_id) {
@@ -28,5 +29,17 @@ class CoachScheduleController extends Controller {
         $data = $request->all();
         $coach_schedule->update($data);
         return response()->json(['success' => trans('admin.updated_record')]);
+    }
+
+    public function destroy($id) {
+        $coach_schedule = CoachSchedule::find($id);
+        $preBookedAppointments = Book::where("day", $coach_schedule->day);
+        if ($preBookedAppointments->exists()) {
+            return response()->json([
+                'error' => "Can't Delete this schedule as a client have already booked an appointment in it"
+            ], 403);
+        };
+        $coach_schedule->delete();
+        return response()->json(['success' => trans('admin.deleted_record')]);
     }
 }
