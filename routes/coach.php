@@ -20,13 +20,16 @@ Route::prefix('coach')->group(function () {
     Route::get('reset/password/{token}', [CoachAuth::class, 'resetPassword']);
     Route::post('reset/password/{token}', [CoachAuth::class, 'resetPasswordUpdateData']);
 
+    /*-----------------------------------------------------------------------------------------------------------------------*/
     Route::middleware(['coach:coach'])->group(function () {
         Route::get('profile', [CoachController::class, 'show'])->name('coach.profile');
         Route::get('profile/edit', [CoachController::class, 'edit'])->name('coach.editInfo');
         Route::put('profile/update/{coach}', [CoachController::class, 'update'])->name('coach.updateInfo');
 
-
+    /*-----------------------------------------------------------------------------------------------------------------------*/
         Route::resource('/schedule', CoachScheduleController::class)->except(['create', 'update', 'show', 'edit', 'destroy']);
         Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');
+        Route::get('/schedule/{id}/edit', [CoachScheduleController::class, 'edit'])->name('schedule.edit');
+
     });
 });

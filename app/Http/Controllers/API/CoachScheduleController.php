@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Models\CoachSchedule;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Admin\UpdateCoachScheduleRequest;
 
 class CoachScheduleController extends Controller {
     public function index($coach_id) {
@@ -16,5 +16,17 @@ class CoachScheduleController extends Controller {
     public function show($id) {
         $coach_schedule = CoachSchedule::find($id);
         return view('coach.schedule.modals.show', compact('coach_schedule'));
+    }
+
+
+    public function edit($id) {
+        $coach_schedule = CoachSchedule::find($id);
+        return view('coach.schedule.modals.edit', compact('coach_schedule'));
+    }
+
+    public function update(UpdateCoachScheduleRequest $request, CoachSchedule $coach_schedule) {
+        $data = $request->all();
+        $coach_schedule->update($data);
+        return response()->json(['success' => trans('admin.updated_record')]);
     }
 }
