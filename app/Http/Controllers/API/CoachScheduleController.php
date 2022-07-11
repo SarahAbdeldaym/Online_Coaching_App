@@ -11,4 +11,10 @@ class CoachScheduleController extends Controller {
         $coach_schedule = CoachSchedule::where('coach_id', $coach_id)->get();
         return $coach_schedule;
     }
+
+
+    public function show($id) {
+        $coach_schedule = CoachSchedule::find($id);
+        return view('coach.schedule.modals.show', compact('coach_schedule'));
+    }
 }

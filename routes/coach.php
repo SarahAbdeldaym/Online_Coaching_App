@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CoachScheduleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\Coach\CoachAuth;
@@ -24,5 +25,8 @@ Route::prefix('coach')->group(function () {
         Route::get('profile/edit', [CoachController::class, 'edit'])->name('coach.editInfo');
         Route::put('profile/update/{coach}', [CoachController::class, 'update'])->name('coach.updateInfo');
 
+
+        Route::resource('/schedule', CoachScheduleController::class)->except(['create', 'update', 'show', 'edit', 'destroy']);
+        Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');
     });
 });
