@@ -42,4 +42,25 @@ class CoachScheduleController extends Controller {
         $coach_schedule->delete();
         return response()->json(['success' => trans('admin.deleted_record')]);
     }
+
+    public function destroyAll() {
+        $itemsIndexes = request('item');
+        $undeletableIndexes  = [];
+
+        foreach ($itemsIndexes as $itemIndex) {
+            $coach_schedule = CoachSchedule::find($itemIndex);
+            $preBookedAppointments = Book::where("day", $coach_schedule->day);
+            if ($preBookedAppointments->exists()) {
+                array_push($undeletableIndexes, $itemIndex);
+            };
+        }
+        if (count($undeletableIndexes) !== 0) {
+            return response()->json([
+                'error' => 'Schedules with ids (' . implode(", ", $undeletableIndexes) . ") Can't be deleted as they have a client already booked an appointment in them"
+            ], 403);
+        }
+
+        CoachSchedule::destroy($itemsIndexes);
+        return response()->json(['success' => trans('admin.deleted_record')]);
+    }
 }

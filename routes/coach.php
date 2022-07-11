@@ -31,6 +31,7 @@ Route::prefix('coach')->group(function () {
         Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');
         Route::get('/schedule/{id}/edit', [CoachScheduleController::class, 'edit'])->name('schedule.edit');
         Route::delete('/schedule/delete/{id}', [CoachScheduleController::class, 'destroy'])->name('schedule.destroy');
+        Route::delete('/schedule/destroy/all', [CoachScheduleController::class, 'destroyAll'])->name('schedule.destroyAll');
 
     });
 });
