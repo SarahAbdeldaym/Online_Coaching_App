@@ -36,6 +36,7 @@ Route::prefix('coach')->group(function () {
 
     Route::get('/appointments', [CoachAppointmentController::class, 'index'])->name('coach.appointments');
     Route::get('/appointments/{book_id}', [CoachAppointmentController::class, 'show']);
+    Route::post('/appointments/confirm/{book_id}', [CoachAppointmentController::class, 'confirm'])->name('coach.appointments.confirm');
 
     });
 });

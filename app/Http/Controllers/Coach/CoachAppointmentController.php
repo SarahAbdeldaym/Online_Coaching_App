@@ -22,5 +22,11 @@ class CoachAppointmentController extends Controller
     }
 
 
-   
+
+    public function confirm($book_id)
+    {
+        $book = Book::find($book_id);
+        $book->update(['confirm' => 1]);
+        return response()->json(['success' => trans('admin.confirmed_successfully')]);
+    }
 }
