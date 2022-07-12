@@ -29,4 +29,10 @@ class CoachAppointmentController extends Controller
         $book->update(['confirm' => 1]);
         return response()->json(['success' => trans('admin.confirmed_successfully')]);
     }
+
+    public function destroyAll()
+    {
+        Book::destroy(request('item'));
+        return response()->json(['success' => trans('admin.deleted_record')]);
+    }
 }
