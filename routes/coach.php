@@ -39,5 +39,19 @@ Route::prefix('coach')->group(function () {
     Route::post('/appointments/confirm/{book_id}', [CoachAppointmentController::class, 'confirm'])->name('coach.appointments.confirm');
     Route::delete('/appointments/destroy/all', [CoachAppointmentController::class, 'destroyAll'])->name('appointments.destroyAll');
 
+    /*-----------------------------------------------------------------------------------------------------------------------*/
+
+    Route::resource('/specialists', SpecialistController::class)->except(['create', 'update']);
+    Route::post('/specialists/{specialist}/update', [SpecialistController::class, 'update'])->name('specialists.update');
+
+
+
+
+
+                Route::get('/dashboard', function () {
+                    return view('coach.dashboard');
+                })->name('coach.dashboard');
+    Route::get('logout', [CoachAuth::class, 'logout'])->name('coach.logout');
+
     });
 });

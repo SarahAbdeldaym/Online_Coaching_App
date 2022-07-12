@@ -119,4 +119,9 @@ class CoachAuth extends Controller {
             return redirect(coachUrl('forgot/password'));
         }
     }
+
+    public function logout() {
+        coach()->logout();
+        return redirect(coachUrl('login'));
+    }
 }
