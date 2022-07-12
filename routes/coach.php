@@ -26,32 +26,31 @@ Route::prefix('coach')->group(function () {
         Route::get('profile/edit', [CoachController::class, 'edit'])->name('coach.editInfo');
         Route::put('profile/update/{coach}', [CoachController::class, 'update'])->name('coach.updateInfo');
 
-    /*-----------------------------------------------------------------------------------------------------------------------*/
+        /*-----------------------------------------------------------------------------------------------------------------------*/
         Route::resource('/schedule', CoachScheduleController::class)->except(['create', 'update', 'show', 'edit', 'destroy']);
         Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');
         Route::get('/schedule/{id}/edit', [CoachScheduleController::class, 'edit'])->name('schedule.edit');
         Route::delete('/schedule/delete/{id}', [CoachScheduleController::class, 'destroy'])->name('schedule.destroy');
         Route::delete('/schedule/destroy/all', [CoachScheduleController::class, 'destroyAll'])->name('schedule.destroyAll');
-    /*-----------------------------------------------------------------------------------------------------------------------*/
+        /*-----------------------------------------------------------------------------------------------------------------------*/
 
-    Route::get('/appointments', [CoachAppointmentController::class, 'index'])->name('coach.appointments');
-    Route::get('/appointments/{book_id}', [CoachAppointmentController::class, 'show']);
-    Route::post('/appointments/confirm/{book_id}', [CoachAppointmentController::class, 'confirm'])->name('coach.appointments.confirm');
-    Route::delete('/appointments/destroy/all', [CoachAppointmentController::class, 'destroyAll'])->name('appointments.destroyAll');
+        Route::get('/appointments', [CoachAppointmentController::class, 'index'])->name('coach.appointments');
+        Route::get('/appointments/{book_id}', [CoachAppointmentController::class, 'show']);
+        Route::post('/appointments/confirm/{book_id}', [CoachAppointmentController::class, 'confirm'])->name('coach.appointments.confirm');
+        Route::delete('/appointments/destroy/all', [CoachAppointmentController::class, 'destroyAll'])->name('appointments.destroyAll');
 
-    /*-----------------------------------------------------------------------------------------------------------------------*/
+        /*-----------------------------------------------------------------------------------------------------------------------*/
+        Route::resource('/specialists', SpecialistController::class)->except(['create', 'update']);
+        Route::post('/specialists/{specialist}/update', [SpecialistController::class, 'update'])->name('specialists.update');
+        Route::delete('/specialists/destroy/all', [SpecialistController::class, 'destroyAll'])->name('specialists.destroyAll');
+        /*-----------------------------------------------------------------------------------------------------------------------*/
 
-    Route::resource('/specialists', SpecialistController::class)->except(['create', 'update']);
-    Route::post('/specialists/{specialist}/update', [SpecialistController::class, 'update'])->name('specialists.update');
+        Route::get('/dashboard', function () {
+            return view('coach.dashboard');
+        })->name('coach.dashboard');
+        Route::get('logout', [CoachAuth::class, 'logout'])->name('coach.logout');
 
-
-
-
-
-                Route::get('/dashboard', function () {
-                    return view('coach.dashboard');
-                })->name('coach.dashboard');
-    Route::get('logout', [CoachAuth::class, 'logout'])->name('coach.logout');
-
+        Route::get('/auth/google/redirect', [SocialiteController::class, 'redirect_to_google'])->name('coach.google_redirect');
+        Route::get('/auth/google/callback', [SocialiteController::class, 'callback_from_google']);
     });
 });
