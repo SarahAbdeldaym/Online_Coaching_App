@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\API\CoachScheduleController;
+use App\Http\Controllers\Admin\SpecialistController;
+use App\Http\Controllers\Coach\CoachScheduleController;
+use App\Http\Controllers\Coach\CoachAppointmentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 use App\Http\Controllers\Coach\CoachAuth;
 use App\Http\Controllers\Coach\CoachController;
+use App\Http\Controllers\Coach\SocialiteController;
 
 
 Route::prefix('coach')->group(function () {
