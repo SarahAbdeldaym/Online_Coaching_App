@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
-
+use App\Mail\AdminResetPassword;
+use App\Models\Admin;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AdminAuth extends Controller {
     //login admin page function
@@ -20,4 +24,8 @@ class AdminAuth extends Controller {
             return redirect(adminUrl('login'));
         }
     }
+
+
+
+
 }
