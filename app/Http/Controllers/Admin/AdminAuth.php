@@ -26,6 +26,29 @@ class AdminAuth extends Controller {
     }
 
 
+    //forget password page
+    public function forgotPassword() {
+        return view('admin.auth.forgot_password');
+    }
 
+    //forget password message send
+    public function forgotPasswordMessage() {
+        $admin = Admin::where('email', request('email'))->first();
+        if (!empty($admin)) {
+            $token = app('auth.password.broker')->createToken($admin);
+            $data  = DB::table('password_resets')->insert([
+                'email'      => $admin->email,
+                'token'      => $token,
+                'created_at' => Carbon::now(),
+            ]);
+
+            Mail::to($admin->email, $admin->name_en)
+                ->send(new AdminResetPassword(['data' => $admin, 'token' => $token]));
+
+            session()->flash('success', 'An Email with reset password link has been sent to your email');
+            return redirect(adminUrl('login'));
+        }
+        return back();
+    }
 
 }

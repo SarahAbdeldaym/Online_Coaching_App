@@ -9,5 +9,6 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('login', [AdminAuth::class, 'login'])->name('admin.login');
     Route::post('login', [AdminAuth::class, 'loginCheck'])->name('admin.loginCheck');
-  
+    Route::get('forgot/password', [AdminAuth::class, 'forgotPassword']);
+    Route::post('forgot/password', [AdminAuth::class, 'forgotPasswordMessage']);
 });
