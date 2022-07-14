@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Mail\AdminResetPassword;
 use App\Models\Admin;
@@ -8,14 +9,17 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class AdminAuth extends Controller {
+class AdminAuth extends Controller
+{
     //login admin page function
-    public function login() {
+    public function login()
+    {
         return view('admin.auth.login');
     }
 
     //check admin login function
-    public function loginCheck() {
+    public function loginCheck()
+    {
         $rememberme = request('rememberme') == 1 ? true : false;
         if (admin()->attempt(['email' => request('email'), 'password' => request('password')], $rememberme)) {
             return redirect(adminUrl("dashboard"));
@@ -27,12 +31,14 @@ class AdminAuth extends Controller {
 
 
     //forget password page
-    public function forgotPassword() {
+    public function forgotPassword()
+    {
         return view('admin.auth.forgot_password');
     }
 
     //forget password message send
-    public function forgotPasswordMessage() {
+    public function forgotPasswordMessage()
+    {
         $admin = Admin::where('email', request('email'))->first();
         if (!empty($admin)) {
             $token = app('auth.password.broker')->createToken($admin);
@@ -51,4 +57,39 @@ class AdminAuth extends Controller {
         return back();
     }
 
+    //reset password page
+    public function resetPassword($token)
+    {
+        $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
+        if (!empty($check_token)) {
+            return view('admin.auth.reset_password', ['data' => $check_token]);
+        } else {
+            return redirect(adminUrl('forgot/password'));
+        }
+    }
+
+    //reset password opearation and update data
+    public function resetPasswordUpdateData($token)
+    {
+        request()->validate([
+            'password'              => 'required|confirmed',
+            'password_confirmation' => 'required',
+        ], [], [
+            'password'              => 'Password',
+            'password_confirmation' => 'Confirmation Password',
+        ]);
+
+        $check_token = DB::table('password_resets')->where('token', $token)->where('created_at', '>', Carbon::now()->subHours(2))->first();
+        if (!empty($check_token)) {
+            $admin = Admin::where('email', $check_token->email)->update([
+                'email'    => $check_token->email,
+                'password' => bcrypt(request('password'))
+            ]);
+            DB::table('password_resets')->where('email', $check_token->email)->delete();
+            session()->flash('success', 'password is reset you can login now');
+            return redirect(adminUrl('login'));
+        } else {
+            return redirect(adminUrl('forgot/password'));
+        }
+    }
 }
