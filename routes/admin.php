@@ -15,4 +15,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('reset/password/{token}', [AdminAuth::class, 'resetPasswordUpdateData']);
 
     /*===============================================================================================================*/
+    Route::middleware(['admin:admin'])->group(function () {
+
+        Route::get('logout', [AdminAuth::class, 'logout'])->name('admin.logout');
+
+    });
+
 });

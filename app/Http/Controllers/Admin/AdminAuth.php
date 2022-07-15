@@ -1,13 +1,15 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdateAdminRequest;
 use App\Mail\AdminResetPassword;
 use App\Models\Admin;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 
 class AdminAuth extends Controller
 {
@@ -92,4 +94,12 @@ class AdminAuth extends Controller
             return redirect(adminUrl('forgot/password'));
         }
     }
+
+        //logout function
+        public function logout() {
+            admin()->logout();
+            return redirect(adminUrl('login'));
+        }
+
+       
 }
