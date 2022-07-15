@@ -23,8 +23,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', function () {
             return view('admin.dashboard.dashboard');
         })->name('admin.dashboard');
-        
 
+        Route::resource('/admins', AdminController::class)->except(['create', 'update']);
+        Route::post('/admins/{admin}/update', [AdminController::class, 'update'])->name('admins.update');
+        Route::delete('/admins/destroy/all', [AdminController::class, 'destroyAll'])->name('admins.destroyAll');
     });
 
 });
