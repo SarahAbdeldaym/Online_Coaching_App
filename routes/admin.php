@@ -38,6 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/countries/{country}/update', [CountryController::class, 'update'])->name('countries.update');
         Route::delete('/countries/destroy/all', [CountryController::class, 'destroyAll'])->name('countries.destroyAll');
 
+        
     });
 
 });
