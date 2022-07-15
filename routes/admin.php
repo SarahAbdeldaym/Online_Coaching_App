@@ -18,7 +18,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::middleware(['admin:admin'])->group(function () {
 
         Route::get('logout', [AdminAuth::class, 'logout'])->name('admin.logout');
+        Route::post('edit-profile/{admin}', [AdminAuth::class, 'edit_profile'])->name('admins.edit-profile');
 
     });
 
 });
+z

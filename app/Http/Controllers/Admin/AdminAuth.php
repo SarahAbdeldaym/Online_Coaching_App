@@ -101,5 +101,23 @@ class AdminAuth extends Controller
             return redirect(adminUrl('login'));
         }
 
-       
+        public function edit_profile(UpdateAdminRequest $request, Admin $admin) {
+            $data = $request->all();
+            if ($request->filled('password')) {
+                $data['password'] = Hash::make($data['password']);
+            } else {
+                $data['password'] = $admin->password;
+            }
+
+            if ($request->hasFile('image')) {
+                if ($request->image != "images/admins/default_admin.png") {
+                    File::delete("storage/" . $request->image);
+                };
+                $data['image'] = $request->file('image')->storePublicly('images/admins');
+            }
+
+            $admin->update($data);
+            session()->flash('success', trans('admin.updated_record'));
+            return back();
+        }
 }
