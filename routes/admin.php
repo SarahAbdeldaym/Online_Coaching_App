@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SpecialistController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
 
@@ -27,6 +28,16 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/admins', AdminController::class)->except(['create', 'update']);
         Route::post('/admins/{admin}/update', [AdminController::class, 'update'])->name('admins.update');
         Route::delete('/admins/destroy/all', [AdminController::class, 'destroyAll'])->name('admins.destroyAll');
+
+
+        Route::resource('/specialists', SpecialistController::class)->except(['create', 'update']);
+        Route::post('/specialists/{specialist}/update', [SpecialistController::class, 'update'])->name('specialists.update');
+        Route::delete('/specialists/destroy/all', [SpecialistController::class, 'destroyAll'])->name('specialists.destroyAll');
+
+        Route::resource('/countries', CountryController::class)->except(['create', 'update']);
+        Route::post('/countries/{country}/update', [CountryController::class, 'update'])->name('countries.update');
+        Route::delete('/countries/destroy/all', [CountryController::class, 'destroyAll'])->name('countries.destroyAll');
+
     });
 
 });
