@@ -38,7 +38,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/countries/{country}/update', [CountryController::class, 'update'])->name('countries.update');
         Route::delete('/countries/destroy/all', [CountryController::class, 'destroyAll'])->name('countries.destroyAll');
 
-        
+        Route::resource('/cities', CityController::class)->except(['create', 'update']);
+        Route::post('/cities/{city}/update', [CityController::class, 'update'])->name('cities.update');
+        Route::delete('/cities/destroy/all', [CityController::class, 'destroyAll'])->name('cities.destroyAll');
     });
 
 });
