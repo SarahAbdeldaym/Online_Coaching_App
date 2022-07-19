@@ -46,7 +46,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/districts/{district}/update', [DistrictController::class, 'update'])->name('districts.update');
         Route::delete('/districts/destroy/all', [DistrictController::class, 'destroyAll'])->name('districts.destroyAll');
 
-        
+        Route::resource('/coaches_schedule', CoachScheduleController::class)->except(['create', 'update']);
+        Route::post('/coaches_schedule/{coach_schedule}/update', [CoachScheduleController::class, 'update'])->name('coaches_schedule.update');
+        Route::delete('/coaches_schedule/destroy/all', [CoachScheduleController::class, 'destroyAll'])->name('coaches_schedule.destroyAll');
     });
 
 });
