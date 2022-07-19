@@ -49,6 +49,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/coaches_schedule', CoachScheduleController::class)->except(['create', 'update']);
         Route::post('/coaches_schedule/{coach_schedule}/update', [CoachScheduleController::class, 'update'])->name('coaches_schedule.update');
         Route::delete('/coaches_schedule/destroy/all', [CoachScheduleController::class, 'destroyAll'])->name('coaches_schedule.destroyAll');
+
+        Route::resource('/books', BookController::class)->except(['create', 'update']);
+        Route::post('/books/{book}/update', [BookController::class, 'update'])->name('books.update');
+        Route::delete('/books/destroy/all', [BookController::class, 'destroyAll'])->name('books.destroyAll');
+
+
     });
 
 });
