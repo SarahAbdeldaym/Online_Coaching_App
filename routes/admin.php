@@ -55,6 +55,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::delete('/books/destroy/all', [BookController::class, 'destroyAll'])->name('books.destroyAll');
 
 
+        Route::get('settings', [SettingController::class, 'setting']);
+        Route::post('settings', [SettingController::class, 'settingSave']);
+
     });
 
 });
