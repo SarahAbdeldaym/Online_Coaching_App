@@ -58,6 +58,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('settings', [SettingController::class, 'setting']);
         Route::post('settings', [SettingController::class, 'settingSave']);
 
+        Route::resource('clients', ClientController::class)->except(['create', 'update']);
+        Route::post('/clients/{client}/update', [ClientController::class, 'update'])->name('clients.update');
+        Route::delete('/clients/destroy/all', [ClientController::class, 'destroyAll'])->name('clients.destroyAll');
     });
 
 });
