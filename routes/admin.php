@@ -65,6 +65,9 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('coaches', CoachController::class)->except(['update']);
         Route::put('coaches/{coach}/update', [CoachController::class, 'update'])->name('coaches.update');
         Route::delete('coaches/destroy/all', [CoachController::class, 'destroyAll'])->name('coaches.destroyAll');
+
+        Route::resource('feedbacks', FeedbackController::class)->except(['create']);
+        Route::delete('feedbacks/destroy/all', [FeedbackController::class, 'destroyAll'])->name('feedbacks.destroyAll');
     });
 
 });
