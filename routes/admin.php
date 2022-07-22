@@ -68,6 +68,11 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::resource('feedbacks', FeedbackController::class)->except(['create']);
         Route::delete('feedbacks/destroy/all', [FeedbackController::class, 'destroyAll'])->name('feedbacks.destroyAll');
+
+        Route::get('statistics', [StatisticsController::class, 'index'])->name('statistics');
+        Route::get('statistics/coach_specialist', [StatisticsController::class, 'coach_specialist'])->name('statistics.coach_specialist');
+        Route::get('statistics/coach_revenue/{year}', [StatisticsController::class, 'coach_revenue'])->name('statistics.coach_revenue');
+
     });
 
 });
