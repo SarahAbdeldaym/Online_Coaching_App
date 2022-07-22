@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\SpecialistController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Config;
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::resource('/countries', CountryController::class)->except(['create', 'update']);
         Route::post('/countries/{country}/update', [CountryController::class, 'update'])->name('countries.update');
         Route::delete('/countries/destroy/all', [CountryController::class, 'destroyAll'])->name('countries.destroyAll');
+        Route::get('country/{country}/city_name', [CountryController::class, 'getCity']);
 
         Route::resource('/cities', CityController::class)->except(['create', 'update']);
         Route::post('/cities/{city}/update', [CityController::class, 'update'])->name('cities.update');
