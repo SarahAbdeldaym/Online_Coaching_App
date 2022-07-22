@@ -75,7 +75,6 @@ if (!function_exists('datatableLang')) {
     }
 }
 
-
 if (!function_exists('savePhoto')) {
 
     function savePhoto($path, $image) {
