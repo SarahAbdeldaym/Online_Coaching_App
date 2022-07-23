@@ -25,7 +25,7 @@ class UpdateClientRequest extends FormRequest
     {
         return [
             'name_en'  => 'required',
-           'name_ar'  => 'required',
+            'name_ar'  => 'required',
             'email'    => ['required', 'email', 'unique:clients,id,' . $this->client->id],
             'password' => ['required', 'min:8'],
             'mobile'  => ['required','unique:clients,id,'. $this->client->id],

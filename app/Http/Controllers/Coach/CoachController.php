@@ -5,20 +5,19 @@ namespace App\Http\Controllers\Coach;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateCoachRequest;
 use App\Models\Coach;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 
-class CoachController extends Controller
-{
-    public function show()
-    {
+
+class CoachController extends Controller {
+    public function show() {
         $coach = Coach::findOrFail(coach()->id());
         return view('coach.coach.show', compact('coach'));
     }
 
-
-    public function edit()
-    {
+    public function edit() {
         $coach = Coach::findOrFail(coach()->id());
         return view('coach.coach.edit', compact('coach'));
     }
@@ -38,10 +37,9 @@ class CoachController extends Controller
             };
             $data['image'] = $request->file('image')->storePublicly('images/coaches');
         }
-
+        
         $coach->update($data);
         session()->flash('success', trans('admin.updated_record'));
         return redirect()->route('coach.profile');
     }
-
 }

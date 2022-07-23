@@ -1,17 +1,17 @@
 <?php
 
-use App\Http\Controllers\API\BookController;
+use App\Http\Controllers\API\CoachScheduleController;
 use App\Http\Controllers\API\CityController;
+use App\Http\Controllers\API\DistrictController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\PasswordController;
+use App\Http\Controllers\API\CoachController;
+use App\Http\Controllers\API\SpecialistController;
+use App\Http\Controllers\API\BookController;
 use App\Http\Controllers\API\ClientAuthController;
 use App\Http\Controllers\API\ClientProfileController;
-use App\Http\Controllers\API\CoachController;
-use App\Http\Controllers\API\CoachScheduleController;
-use App\Http\Controllers\API\DistrictController;
 use App\Http\Controllers\API\FeedbackController;
-use App\Http\Controllers\API\PasswordController;
-use App\Http\Controllers\API\SpecialistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,12 +28,13 @@ use App\Http\Controllers\API\SpecialistController;
 //     return $request->user();
 // });
 
+
 Route::controller(ClientAuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('login', 'login')->name('login');
     Route::get('getLogin', 'getLogin')->name('getLogin');
     Route::get('cancelAppointment/{id}', 'cancelAppointment');
-    
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('clientUser', 'clientUser');
         Route::post('logout', 'logout');
@@ -47,25 +48,23 @@ Route::controller(PasswordController::class)->group(function () {
 
 Route::controller(CoachController::class)->group(function () {
     Route::get('coaches', 'index');
-    Route::get('coaches/{id}', 'show');
     Route::get('search', 'search');
     Route::get('filter', 'filter');
+    Route::get('coaches/{id}', 'show');
 });
 
 
 Route::controller(FeedbackController::class)->group(function () {
     Route::post('feedbacks', 'store');
-    Route::put('feedbacks', 'update');
     Route::get('feedbacks/{id}',  'index');
+    Route::put('feedbacks', 'update');
 });
-
 
 Route::controller(BookController::class)->group(function () {
-    Route::get('/books',  'index');
     Route::post('book/store', 'store');
+    Route::get('/books',  'index');
     Route::post('/books/test',  'store');
 });
-
 
 Route::get('available-time/{coach_id}', [CoachScheduleController::class, 'index']);
 Route::put('update/{client}', [ClientProfileController::class, 'update']);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Specialist;
+use Illuminate\Http\Request;
 
 class SpecialistController extends Controller
 {

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\Coach;
 
 use App\Http\Controllers\Controller;
@@ -35,15 +34,14 @@ class CoachAuth extends Controller {
         } else {
             $data['image'] = "images/coaches/default_coach.png";
         }
-
+        
         Coach::create($data);
         session()->flash('success', 'Account is created you can login now');
         return redirect(coachUrl('login'));
     }
 
-
-     //Login Coach page function
-     public function login() {
+    //Login Coach page function
+    public function login() {
         return view('coach.auth.login');
     }
 
@@ -56,6 +54,13 @@ class CoachAuth extends Controller {
             session()->flash('error', trans('admin.incorrect_information_login'));
             return redirect(coachUrl('login'));
         }
+    }
+
+
+    //Coach Logout Function
+    public function logout() {
+        coach()->logout();
+        return redirect(coachUrl('login'));
     }
 
 
@@ -118,10 +123,5 @@ class CoachAuth extends Controller {
         } else {
             return redirect(coachUrl('forgot/password'));
         }
-    }
-
-    public function logout() {
-        coach()->logout();
-        return redirect(coachUrl('login'));
     }
 }

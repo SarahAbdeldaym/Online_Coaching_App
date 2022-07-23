@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Coach;
+use App\Models\Book;
 use App\Models\CoachSchedule;
 use App\Models\Specialist;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +48,7 @@ class StatisticsController extends Controller {
         $coachInfo = null;
         $fees = null;
         $max_no = 0;
-        $coachFees = CoachSchedule::select(DB::raw("SUM(fees) as fees,coach_id as id"))
+        $coachFees = Book::select(DB::raw("SUM(fees) as fees,coach_id as id"))
             ->whereYear('created_at', $year)
             ->groupBy(DB::raw("coach_id"))
             ->pluck('fees', 'id');

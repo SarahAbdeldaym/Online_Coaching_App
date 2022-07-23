@@ -5,22 +5,18 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Coach;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class CoachController extends Controller
-{
-    public function index()
-    {
+class CoachController extends Controller {
+    public function index() {
         return Coach::with(['specialist', 'country'])->paginate(5);
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         return Coach::where('id', $id)->with(['specialist', 'country', 'city', 'district'])->get();
     }
 
-
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         return $this->handleSearch($request)->get();
     }
 
@@ -29,8 +25,7 @@ class CoachController extends Controller
         return $result->paginate(5);
     }
 
-    private function handleSearch(Request $request)
-    {
+    private function handleSearch(Request $request) {
         $filteredCoaches = Coach::with(['specialist', 'country', 'city', 'district']);
         if ($request->name_en) {
             $filteredCoaches = $filteredCoaches->where('name_en', $request->name_en);

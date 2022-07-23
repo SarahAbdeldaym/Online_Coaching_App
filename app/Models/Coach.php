@@ -35,7 +35,7 @@ class Coach extends Authenticatable {
         'password', 'remember_token',
     ];
 
-    protected $appends = ['total_rate', 'age',];
+    protected $appends = ['total_rate', 'age'];
 
     //Relationship of Coach With Specialist
     public function specialist() {
@@ -69,7 +69,8 @@ class Coach extends Authenticatable {
         if ($totalRates == 0 && $rates_count == 0) {
             return 0;
         }
-        return $totalRates / $rates_count;
+        $rate = number_format((float)$totalRates / $rates_count, 1, '.', '');
+        return $rate;
     }
 
     public function getAgeAttribute() {

@@ -13,10 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\API\Client\LoginRequest;
 use App\Http\Requests\API\Client\RegisterRequest;
 
-class ClientAuthController extends Controller
-{
-    public function register(RegisterRequest $request)
-    {
+class ClientAuthController extends Controller {
+    public function register(RegisterRequest $request) {
         $client = new Client();
 
         if ($request->hasFile('image')) {
@@ -46,8 +44,7 @@ class ClientAuthController extends Controller
         }
     }
 
-    public function login(LoginRequest $request)
-    {
+    public function login(LoginRequest $request) {
         $client = Client::where('email', $request->email)->first();
         if (!$client || !Hash::check($request->password, $client->password)) {
             return response()->json([
@@ -66,16 +63,12 @@ class ClientAuthController extends Controller
         ])->withCookie($cookie);
     }
 
-
-
-    public function getLogin(Request $request)
-    {
+    public function getLogin(Request $request) {
         dd($request);
         return $request->user();
     }
 
-    public function clientUser(Request $request)
-    {
+    public function clientUser(Request $request) {
         if (Auth::check()) {
             $client = Client::with(['books', 'books.coach'])
                 ->where('id', $request->user()->id)->first();
@@ -87,20 +80,18 @@ class ClientAuthController extends Controller
         }
     }
 
-
-    public function logout()
-    {
-        $cookie = Cookie::forget('jwt');
-        return response()->json([
-            "message" => 'Logout successfully',
-        ])->withCookie($cookie);
-    }
-
     public function cancelAppointment($id) {
         Book::find($id)->delete();
         return response()->json([
             "message" => "Appointment canceled successfully",
             "status"  => 203,
         ], Response::HTTP_OK);
+    }
+
+    public function logout() {
+        $cookie = Cookie::forget('jwt');
+        return response()->json([
+            "message" => 'Logout successfully',
+        ])->withCookie($cookie);
     }
 }

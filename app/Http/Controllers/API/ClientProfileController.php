@@ -6,7 +6,10 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\API\Client\UpdateProfileRequest;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\File;
 
 class ClientProfileController extends Controller {

@@ -22,7 +22,6 @@ class CoachAppointmentController extends Controller
     }
 
 
-
     public function confirm($book_id)
     {
         $book = Book::find($book_id);
@@ -35,4 +34,5 @@ class CoachAppointmentController extends Controller
         Book::destroy(request('item'));
         return response()->json(['success' => trans('admin.deleted_record')]);
     }
+
 }

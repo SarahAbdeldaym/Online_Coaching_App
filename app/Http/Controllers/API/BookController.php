@@ -24,5 +24,4 @@ class BookController extends Controller {
             "status"  => 200,
         ], Response::HTTP_CREATED);
     }
-
 }
