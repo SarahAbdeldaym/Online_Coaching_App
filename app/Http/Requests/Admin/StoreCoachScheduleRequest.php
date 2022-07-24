@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\NotOverlapped;
 
 class StoreCoachScheduleRequest extends FormRequest
 {
@@ -24,9 +25,9 @@ class StoreCoachScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            'day'                  => 'required|date',
+            'day'                  => 'required|date|after:today',
             'from'                 => 'required|date_format:H:i|before_or_equal:to',
-            'to'                   => 'required|date_format:H:i|after_or_equal:from',
+            'to'                   => ['required', 'date_format:H:i', 'after:from', new NotOverlapped($this->all())],
             'session_duration'       => ['required', 'numeric'],
             'coach_id'            => ['required', 'numeric'],
         ];

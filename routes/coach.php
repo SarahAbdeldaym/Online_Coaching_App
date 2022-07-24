@@ -38,12 +38,6 @@ Route::prefix('coach')->group(function () {
         Route::delete('/appointments/destroy/all', [CoachAppointmentController::class, 'destroyAll'])->name('appointments.destroyAll');
         //==========================================================================================================================//
 
-        //=======================================Specialty Routes===================================================================//
-        Route::resource('/specialists', SpecialistController::class)->except(['create', 'update']);
-        Route::post('/specialists/{specialist}/update', [SpecialistController::class, 'update'])->name('specialists.update');
-        Route::delete('/specialists/destroy/all', [SpecialistController::class, 'destroyAll'])->name('specialists.destroyAll');
-        //==========================================================================================================================//
-
         //=================================================Coach Schedule Routes===============================================//
         Route::resource('/schedule', CoachScheduleController::class)->except(['create', 'update', 'show', 'edit', 'destroy']);
         Route::get('/schedule/{id}', [CoachScheduleController::class, 'show'])->name('schedule.show');

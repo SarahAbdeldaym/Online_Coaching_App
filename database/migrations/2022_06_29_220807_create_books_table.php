@@ -18,6 +18,7 @@ class CreateBooksTable extends Migration {
             $table->unsignedBigInteger('client_id')->nullable();
 
             $table->date('day');
+            $table->string('mobile');
             $table->double('fees', 15, 2);
             $table->boolean('confirm')->default(0);
             $table->time('time');

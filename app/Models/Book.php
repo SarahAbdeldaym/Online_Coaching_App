@@ -16,7 +16,7 @@ class Book extends Model
         'day',
         'fees',
         'confirm',
-        'time'
+        'time',
     ];
 
     public function coach()

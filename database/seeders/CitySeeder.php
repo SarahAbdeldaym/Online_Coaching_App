@@ -13,7 +13,7 @@ class CitySeeder extends Seeder
         $egypt = Country::create(['code' => 'EG', 'code' => 'BS', 'name_ar' => '', 'name_en' => 'Egypt', 'created_at' => now(), 'updated_at' => now()]);
 
         City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'القاهرة', 'name_en'     => 'Cairo']);
-        City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'الآسكندرية', 'name_en'  => 'Alex']);
+        City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'الآسكندرية', 'name_en'  => 'Alexandria']);
         City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'البحيرة', 'name_en'     => 'El Buheira']);
         City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'حلوان', 'name_en'       => 'Ḩalwān']);
         City::create(['country_id' => $egypt->id, 'code' => 'BS', 'name_ar' => 'السويس', 'name_en'      => 'Suez']);

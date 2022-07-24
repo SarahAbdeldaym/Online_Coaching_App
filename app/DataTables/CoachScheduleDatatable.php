@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\CoachSchedule;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class CoachScheduleDatatable extends DataTable {
     /**
@@ -20,6 +21,12 @@ class CoachScheduleDatatable extends DataTable {
                 'checkbox',
                 'actions',
             ])
+            ->editColumn('from', function ($row) {
+                return Carbon::parse($row->from)->format('g:i a');
+            })
+            ->editColumn('to', function ($row) {
+                return Carbon::parse($row->to)->format('g:i a');
+            })
             ->editColumn('created_at', function ($request) {
                 return $request->created_at->toDayDateTimeString();
             })

@@ -54,6 +54,28 @@
 </div>
 
 <div class="form-group">
+    {{ Form::label('city', trans('city'), ['class' => 'control-label col-sm-3']) }}
+    {!! Form::select('city_id', App\Models\City::pluck('name_' . session('lang'), 'id'), $coach->city_id, [
+        'class' => 'form-control',
+        'placeholder' => 'Choose City...',
+    ]) !!}
+</div>
+
+<div class="form-group">
+    {{ Form::label('district', trans('district'), ['class' => 'control-label col-sm-3']) }}
+    {!! Form::select(
+        'district_id',
+        App\Models\District::pluck('name_' . session('lang'), 'id'),
+        $coach->district_id,
+        [
+            'class' => 'form-control',
+            'placeholder' => 'Choose District...',
+        ],
+    ) !!}
+</div>
+
+
+<div class="form-group">
     {!! Form::label('password', trans('admin.password')) !!}
     {!! Form::password('password', ['class' => 'form-control', 'data-strength' => '']) !!}
     <h6 id="pass-msg" style="display:none; color:#dd4b39;">{{ trans('admin.password_massage') }}</h6>
@@ -83,7 +105,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('session_time', trans('admin.Session Time')) !!}
-    {!! Form::text('session_time', $coach->session_time, ['class' => 'form-control']) !!}
+    {!! Form::number('session_time', $coach->session_time, ['class' => 'form-control']) !!}
 </div>
 {!! Form::submit(trans('coach.edit'), ['class' => 'btn btn-primary']) !!}
 {!! Form::close() !!}

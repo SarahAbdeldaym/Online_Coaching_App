@@ -34,8 +34,10 @@
                     <h4 class="modal-title">Edit</h4>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
+                <div class="alert alert-danger print-error-msg" style="display:none">
+                    <ul></ul>
+                </div>
                 <div class="modal-body" id="ajax_edit_content">
-
                 </div>
             </div>
         </div>
@@ -114,7 +116,6 @@
 
                     {!! Form::open(['id' => 'store_form']) !!}
                     <input type="hidden" name="coach_id" id="coach_id" value="{{ coach()->user()->id }}">
-                    <input type="hidden" name="coach_address_id" value="{{ request('coach_address_id') }}">
                     <div class="form-group">
                         {!! Form::label('day', trans('admin.day')) !!}
                         {!! Form::date('day', old('day'), ['class' => 'form-control']) !!}

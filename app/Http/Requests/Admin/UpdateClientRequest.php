@@ -21,10 +21,10 @@ class UpdateClientRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'email'         => ['nullable', 'email', 'unique:clients,id,' . $this->client->id],
+            'email'         => 'required|email|unique:clients,email,' . $this->client->id,
             'password'      => ['nullable', 'min:8'],
             'mobile'        => ['nullable', 'unique:clients,id,' . $this->client->id],
-            'date_of_birth' => ['nullable','date'],
+            'date_of_birth' => 'required|date|before:01-jan-2004|after:01-jan-1920',
             'image'         => ['sometimes', 'nullable', 'image', 'mimes:jpg,jpeg,png'],
         ];
     }

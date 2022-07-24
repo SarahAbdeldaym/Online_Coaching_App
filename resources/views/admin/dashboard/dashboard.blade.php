@@ -9,7 +9,7 @@
                 <a href="{{ adminUrl('coaches') }}" class="small-box bg-info">
                     <div class="inner">
                         <h3>{{ App\Models\Coach::count() }}</h3>
-                        <p>Coaches</p>
+                        <p>{{trans("coach.coaches")}}</p>
                     </div>
                 </a>
             </div>
@@ -19,7 +19,7 @@
                 <a href="{{ adminUrl('clients') }}" class="small-box bg-success">
                     <div class="inner">
                         <h3>{{ App\Models\Client::count() }}</h3>
-                        <p>Clients</p>
+                        <p>{{trans("admin.clients")}}</p>
                     </div>
                 </a>
             </div>
@@ -29,7 +29,7 @@
                 <a href="{{ adminUrl('books') }}" class="small-box bg-warning">
                     <div class="inner">
                         <h3>{{ App\Models\Book::count() }}</h3>
-                        <p>Reservations</p>
+                        <p>{{trans("admin.reservations")}}</p>
                     </div>
                 </a>
             </div>
@@ -39,7 +39,7 @@
                 <a href="{{ adminUrl('books') }}" class="small-box bg-danger">
                     <div class="inner">
                         <h3>{{ App\Models\Book::where('confirm', 1)->count() }}</h3>
-                        <p>Confirmed Reservations</p>
+                        <p>{{trans("admin.confirmed_reservations")}}</p>
                     </div>
                 </a>
             </div>

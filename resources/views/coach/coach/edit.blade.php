@@ -96,7 +96,7 @@
 
                     <div class="form-group">
                         {!! Form::label('session_time', trans('admin.Session Time')) !!}
-                        {!! Form::text('session_time', $coach->session_time, ['class' => 'form-control']) !!}
+                        {!! Form::number('session_time', $coach->session_time, ['class' => 'form-control']) !!}
                     </div>
 
                     <div class="form-group">

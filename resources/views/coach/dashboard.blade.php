@@ -6,7 +6,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>{{ App\Models\Book::where('coach_id', coach()->user()->id)->count() }}</h3>
-                        <p>My Reservations</p>
+                        <p>{{trans("admin.my_reservations")}}</p>
                     </div>
                 </div>
             </a>
@@ -15,7 +15,7 @@
                     <div class="inner">
                         <h3>{{ App\Models\Book::where('coach_id', coach()->user()->id)->where('confirm', 1)->count() }}
                         </h3>
-                        <p>My Confirmed Reservations</p>
+                        <p>{{trans("admin.my_confirmed_reservations")}}</p>
                     </div>
                 </div>
             </a>

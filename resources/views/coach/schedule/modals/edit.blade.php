@@ -3,10 +3,9 @@
 {!! Form::open(['id' => 'update_form']) !!}
     <input type="hidden" name="id" id="id" value="{{$coach_schedule->id}}">
     <input type="hidden" name="coach_id" id="coach_id" value="{{$coach_schedule->coach_id}}">
-    <input type="hidden" name="coach_address_id" value="{{ $coach_schedule->coach_address_id }}">
     <div class="form-group">
         {!! Form::label('day', trans('admin.day')) !!}
-        {!! Form::date('day', old('day'), ['class' => 'form-control']) !!}
+        {!! Form::date('day', $coach_schedule->day, ['class' => 'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('from', trans('admin.from')) !!}

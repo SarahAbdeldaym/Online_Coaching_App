@@ -1,6 +1,6 @@
 <script type="text/javascript">
 
-    $("#country_n").change(function(){
+    $(".country_n").change(function(){
         if($(this).val() !== '' && $(this).val() !== null){
         $.ajax({
             url:'{{ url('admin/country') }}'+'/'+ $(this).val() + '/city_name/',

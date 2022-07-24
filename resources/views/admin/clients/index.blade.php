@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('pageTitle', trans('client.clients'))
+@section('pageTitle', trans('admin.clients'))
 @section('content')
 
     <div class="card">

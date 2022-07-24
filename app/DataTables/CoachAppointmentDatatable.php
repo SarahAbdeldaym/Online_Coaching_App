@@ -3,7 +3,9 @@
 namespace App\DataTables;
 
 use App\Models\Book;
+use App\Models\Client;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class CoachAppointmentDatatable extends DataTable {
     /**
@@ -20,6 +22,12 @@ class CoachAppointmentDatatable extends DataTable {
                 'checkbox',
                 'actions',
             ])
+            ->addColumn('mobile', function ($row) {
+                return Client::find($row->client_id)->mobile;
+            })
+            ->editColumn('time', function ($row) {
+                return Carbon::parse($row->time)->format('g:i a');
+            })
             ->editColumn('created_at', function ($request) {
                 return $request->created_at->toDayDateTimeString();
             })
@@ -97,6 +105,10 @@ class CoachAppointmentDatatable extends DataTable {
                 'name'  => 'client_id',
                 'data'  => 'client.name_' . session('lang'),
                 'title' => trans('admin.client_id'),
+            ], [
+                'name'  => 'Client Mobile',
+                'data'  => 'mobile',
+                'title' => trans('admin.client_mobile'),
             ], [
                 'name'  => 'day',
                 'data'  => 'day',

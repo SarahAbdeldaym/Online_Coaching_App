@@ -38,8 +38,10 @@ class CoachScheduleController extends Controller {
         return view('coach.schedule.modals.edit', compact('coach_schedule'));
     }
 
-    public function update(UpdateCoachScheduleRequest $request, CoachSchedule $coach_schedule) {
-        $preBookedAppointments = Book::where("day", $coach_schedule->day);
+    public function update(UpdateCoachScheduleRequest $request) {
+        $coach_schedule = CoachSchedule::find($request->id);
+        $preBookedAppointments = Book::where("coach_id", $coach_schedule->coach_id)
+            ->where("day", $coach_schedule->day);
         if ($preBookedAppointments->exists()) {
             return response()->json([
                 'error' => "Can't Update this schedule as a client have already booked an appointment in it"
@@ -52,7 +54,8 @@ class CoachScheduleController extends Controller {
 
     public function destroy($id) {
         $coach_schedule = CoachSchedule::find($id);
-        $preBookedAppointments = Book::where("day", $coach_schedule->day);
+        $preBookedAppointments = Book::where("coach_id", $coach_schedule->coach_id)
+            ->where("day", $coach_schedule->day);
         if ($preBookedAppointments->exists()) {
             return response()->json([
                 'error' => "Can't Delete this schedule as a client have already booked an appointment in it"
@@ -68,7 +71,8 @@ class CoachScheduleController extends Controller {
 
         foreach ($itemsIndexes as $itemIndex) {
             $coach_schedule = CoachSchedule::find($itemIndex);
-            $preBookedAppointments = Book::where("day", $coach_schedule->day);
+            $preBookedAppointments = Book::where("coach_id", $coach_schedule->coach_id)
+                ->where("day", $coach_schedule->day);
             if ($preBookedAppointments->exists()) {
                 array_push($undeletableIndexes, $itemIndex);
             };

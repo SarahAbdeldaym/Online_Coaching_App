@@ -1,5 +1,6 @@
 <script>
     function printErrorMsg(data) {
+        console.log(data);
         $(".print-error-msg").find("ul").html('');
         $(".print-error-msg").css('display', 'block');
 
@@ -74,7 +75,7 @@
     //////////////////////////
     $(document).ready(function() {
         $(document).on('click', '.edit-ajax', function() {
-            console.log($(this).data('ajax'));
+            $(".print-error-msg").css('display', 'none');
             $.ajax({
                 url: '{{ coachUrl('') }}/schedule/' + $(this).data('ajax') + '/edit',
                 type: 'get',
@@ -91,7 +92,7 @@
     $(document).ready(function() {
         $(document).on('submit', '#update_form', function(event) {
             event.preventDefault();
-            console.log(new FormData(this));
+            $(".print-error-msg").css('display', 'none');
             coach_id = $('#update_form #id').val();
             $.ajax({
                 url: '{{ coachUrl('') }}/schedule/' + $('#ajax_edit_content #id').val() +
@@ -112,17 +113,10 @@
                     $('#ajax_edit').modal('toggle');
                 },
                 error: function(data) {
-                    var errors = data.responseJSON;
-                    console.log(errors);
-                    var errorsHtml = '<div class="alert alert-danger"><ul class="mb-0">';
-                    $.each(errors.errors, function(key, value) {
-                        errorsHtml += '<li>' + value[0] + '</li>';
-                    });
-                    errorsHtml += '</ul></div>';
-                    $('#ajax_edit_content #ajax_edit_errors').html(errorsHtml);
+                    printErrorMsg(data);
                 }
 
-            }); //end of ajax request
+            });
 
         });
     });

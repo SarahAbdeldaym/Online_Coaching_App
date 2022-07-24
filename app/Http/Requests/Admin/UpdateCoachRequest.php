@@ -19,7 +19,7 @@ class UpdateCoachRequest extends FormRequest {
             'name_en'       => 'required',
             'name_ar'       => 'required',
             'image'         => ['sometimes', 'nullable', 'image', 'mimes:jpg,jpeg,png'],
-            'date_of_birth' => 'required|date|before:01-jan-2000|after:01-jan-1920',
+            'date_of_birth' => 'required|date|before:01-jan-2004|after:01-jan-1920',
             'specialist_id' => 'required',
         ];
 
@@ -30,7 +30,7 @@ class UpdateCoachRequest extends FormRequest {
             ];
         } else {   //PUT
             $rules += [
-                'email'    => 'required|email|unique:coaches,email,' . $this->coach->id,
+                'email'         => 'required|email|unique:coaches,email,' . $this->coach->id,
                 'password' => ['nullable', 'min:8'],
             ];
         }

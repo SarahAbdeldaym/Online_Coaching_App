@@ -4,6 +4,7 @@ namespace App\DataTables;
 
 use App\Models\Book;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class BookDatatable extends DataTable {
     /**
@@ -20,6 +21,9 @@ class BookDatatable extends DataTable {
                 'checkbox',
                 'actions',
             ])
+            ->editColumn('time', function ($row) {
+                return Carbon::parse($row->time)->format('g:i a');
+            })
             ->editColumn('created_at', function ($request) {
                 return $request->created_at->toDayDateTimeString();
             })
@@ -72,7 +76,6 @@ class BookDatatable extends DataTable {
                 'language'   => datatableLang(),
                 'responsive' => true,
                 'autoWidth'  => true,
-
             ]);
     }
 
@@ -107,7 +110,7 @@ class BookDatatable extends DataTable {
                 'name'  => 'day',
                 'data'  => 'day',
                 'title' => trans('admin.day'),
-            ],  [
+            ], [
                 'name'  => 'fees',
                 'data'  => 'fees',
                 'title' => trans('admin.fees'),

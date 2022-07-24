@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="" class="brand-link">
-        <img src="{{ url('/design/adminlte') }}/dist/img/AdminLTELogo.png" alt="AdminLTE Logo"
+        <img src="http://localhost:8000/storage/images/logo.png" alt="captainy logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">@lang('admin.sitename')</span>
     </a>

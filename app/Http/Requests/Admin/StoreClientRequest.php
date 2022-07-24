@@ -4,15 +4,13 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreClientRequest extends FormRequest
-{
+class StoreClientRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize()
-    {
+    public function authorize() {
         return true;
     }
 
@@ -21,15 +19,14 @@ class StoreClientRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'name_en'  => 'required',
             'name_ar'  => 'required',
             'email'    => ['required', 'email', 'unique:clients'],
             'password' => ['required', 'min:8'],
-            'mobile'   => ['required','unique:clients'],
-            'date_of_birth' => ['required','date'],
+            'mobile'   => ['required', 'unique:clients'],
+            'date_of_birth'  => 'required|date|before:01-jan-2004|after:01-jan-1920',
             'gender'   => 'required',
             'image'    => ['sometimes', 'nullable', 'image', 'mimes:jpg,jpeg,png'],
         ];

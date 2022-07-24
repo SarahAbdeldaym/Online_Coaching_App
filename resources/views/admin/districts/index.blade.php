@@ -126,7 +126,7 @@
                     <div class="form-group col-md-6 col-sm-12">
                         <label for="country_id" class="control-label col-sm-3">@lang('admin.Country')</label>
                         <div>
-                            <select class="form-control" name="country_id" id="country_n">
+                            <select class="form-control country_n" name="country_id">
 
                                 <option selected value="">@lang('admin.Choose_One')</option>
                                 @foreach (App\Models\Country::all() as $country)

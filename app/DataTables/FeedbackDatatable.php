@@ -46,7 +46,6 @@ class FeedbackDatatable extends DataTable {
                 'dom'        => 'Blfrtip',
                 'lengthMenu' => [[10, 25, 50, 100], [10, 25, 50, 100]],
                 'buttons'    => [
-                    ['text'   => '<i class="fa fa-trash"></i>', 'className' => 'btn btn-danger delBtn'],
                     ['extend' => 'csv', 'className' => 'btn btn-info', 'text' => '<i class="fas fa-file-csv" style="margin:0 2px;"></i> ' . trans('admin.ex_csv')],
                     ['extend' => 'excel', 'className' => 'btn btn-success', 'text' => '<i class="fas fa-file-excel" style="margin:0 2px;"></i> ' . trans('admin.ex_excel')],
                     ['extend' => 'pdfHtml5', 'className' => 'btn btn-warning', 'text' => '<i class="fas fa-file-pdf" style="margin:0 2px;"></i> ' . trans('admin.ex_pdf')],
