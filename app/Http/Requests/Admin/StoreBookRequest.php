@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\AppointmentsOverlap;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\InRange;
 
 class StoreBookRequest extends FormRequest {
     /**
@@ -21,11 +23,11 @@ class StoreBookRequest extends FormRequest {
      */
     public function rules() {
         return [
-            'coach_id'   => 'required|numeric',
-            'client_id'  => ['required', 'numeric'],
+            'coach_id'    => 'required|numeric',
+            'client_id'   => ['required', 'numeric'],
             'day'         => ['required', 'date'],
             'fees'        => ['required', 'numeric'],
-            'time'        => 'required|date_format:H:i',
+            'time'        => ['required', 'date_format:H:i', new InRange($this->all()), new AppointmentsOverlap($this->all())],
         ];
     }
 }

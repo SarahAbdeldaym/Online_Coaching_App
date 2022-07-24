@@ -2,10 +2,11 @@
 
 namespace App\Rules;
 
+use App\Models\Book;
 use App\Models\CoachSchedule;
 use Illuminate\Contracts\Validation\Rule;
 
-class NotOverlapped implements Rule {
+class InRange implements Rule {
 
     private $data;
 
@@ -26,19 +27,12 @@ class NotOverlapped implements Rule {
      * @return bool
      */
     public function passes($attribute, $value) {
-        if(!empty($this->data['id'])){
-            $overlapExist = CoachSchedule::query()
-            ->where('id', '!=', $this->data['id'])
+        $inRange = CoachSchedule::query()
             ->where('coach_id',  $this->data['coach_id'])
             ->where('day', $this->data['day'])
-            ->whereBetween($attribute, [request()->from, request()->to])->exists();
-        }else{
-            $overlapExist = CoachSchedule::query()
-            ->where('coach_id',  $this->data['coach_id'])
-            ->where('day', $this->data['day'])
-            ->whereBetween($attribute, [request()->from, request()->to])->exists();
-        }
-        return !$overlapExist;
+            ->where('from', '<=', $this->data['time'])
+            ->where('to', '>', $this->data['time'])->exists();
+        return $inRange;
     }
 
     /**
@@ -47,6 +41,6 @@ class NotOverlapped implements Rule {
      * @return string
      */
     public function message() {
-        return 'The selected period is overlapping with either starting time or ending time of other another schedule.';
+        return "The selected coach doesn't have a schedule matching that time to create an appointment.";
     }
 }
